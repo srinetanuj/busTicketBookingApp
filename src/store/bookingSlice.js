@@ -51,7 +51,6 @@ const bookingSlice = createSlice({
         state.selectedSeats = state.selectedSeats.filter(
           (s) => s.seatNumber !== seatNumber
         );
-        // keep passengerInfo length in sync: remove last passenger entry
         if (state.passengerInfo.length > state.selectedSeats.length) {
           state.passengerInfo = state.passengerInfo.slice(
             0,
