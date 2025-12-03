@@ -1,6 +1,6 @@
 // Search Details Page
 
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { filterBuses, getBusById } from "../services/busService";
@@ -21,20 +21,7 @@ const SearchDetailsPage = () => {
     (state) => state.bus
   );
 
-  useEffect(() => {
-    // Fetch buses based on search criteria
-    if (
-      searchCriteria.fromCity &&
-      searchCriteria.toCity &&
-      searchCriteria.date
-    ) {
-      fetchBuses();
-    } else {
-      navigate("/");
-    }
-  }, [searchCriteria]);
-
-  const fetchBuses = async () => {
+  const fetchBuses = useCallback(async () => {
     try {
       dispatch(setLoading(true));
       const filteredBuses = await filterBuses(
@@ -49,7 +36,30 @@ const SearchDetailsPage = () => {
     } finally {
       dispatch(setLoading(false));
     }
-  };
+  }, [
+    dispatch,
+    searchCriteria.fromCity,
+    searchCriteria.toCity,
+    searchCriteria.date,
+  ]);
+
+  useEffect(() => {
+    if (
+      searchCriteria.fromCity &&
+      searchCriteria.toCity &&
+      searchCriteria.date
+    ) {
+      fetchBuses();
+    } else {
+      navigate("/");
+    }
+  }, [
+    fetchBuses,
+    navigate,
+    searchCriteria.fromCity,
+    searchCriteria.toCity,
+    searchCriteria.date,
+  ]);
 
   const handleSelectSeats = async (bus) => {
     try {

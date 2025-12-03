@@ -27,21 +27,22 @@ const SeatSelectionPage = () => {
       navigate("/");
       return;
     }
-    fetchSeats();
-  }, [selectedBus]);
 
-  const fetchSeats = async () => {
-    try {
-      setLoading(true);
-      const seatsData = await getSeatLayout(parseInt(busId));
-      setSeats(seatsData);
-      setError(null);
-    } catch (err) {
-      setError("Failed to load seats. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const fetchSeats = async () => {
+      try {
+        setLoading(true);
+        const seatsData = await getSeatLayout(parseInt(busId));
+        setSeats(seatsData);
+        setError(null);
+      } catch (err) {
+        setError("Failed to load seats. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSeats();
+  }, [selectedBus, busId, navigate]);
 
   const handleSeatSelect = (seat) => {
     if (selectedSeats.length >= 4) {
