@@ -5,15 +5,15 @@ const initialState = {
   totalFare: 0,
   passengerInfo: [
     {
-      firstName: "anuj",
-      lastName: "singh",
-      age: "",
-      gender: "",
+      firstName: "Anuj",
+      lastName: "Singh",
+      age: "26",
+      gender: "Male",
     },
   ],
   contactInfo: {
     email: "anuj@gmail.com",
-    phone: "",
+    phone: "9876543212",
   },
   bookingDetails: null,
   loading: false,
@@ -59,9 +59,48 @@ const bookingSlice = createSlice({
         }
       }
     },
+    setPassengerInfoArray: (state, action) => {
+      state.passengerInfo = Array.isArray(action.payload)
+        ? action.payload
+        : [action.payload];
+    },
+    setContactInfo: (state, action) => {
+      state.contactInfo = { ...state.contactInfo, ...(action.payload || {}) };
+    },
+    updatePassengerAtIndex: (state, action) => {
+      const { index, data } = action.payload;
+      if (state.passengerInfo[index]) {
+        state.passengerInfo[index] = {
+          ...state.passengerInfo[index],
+          ...data,
+        };
+      }
+    },
+    setBookingDetails: (state, action) => {
+      state.bookingDetails = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    resetBooking: (state) => {
+      return initialState;
+    },
   },
 });
 
-export const { addSeat, removeSeat } = bookingSlice.actions;
+export const {
+  addSeat,
+  removeSeat,
+  setPassengerInfoArray,
+  setContactInfo,
+  updatePassengerAtIndex,
+  setBookingDetails,
+  setLoading,
+  setError,
+  resetBooking,
+} = bookingSlice.actions;
 
 export default bookingSlice.reducer;

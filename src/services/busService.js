@@ -218,3 +218,26 @@ export const getSeatLayout = async (busId) => {
 export const getBusById = async (busId) => {
   return buses.find((bus) => bus.id === parseInt(busId));
 };
+const generateTicketId = () => {
+  const prefix = "BUS";
+  const timestamp = Date.now().toString().slice(-6);
+  const random = Math.floor(Math.random() * 1000)
+    .toString()
+    .padStart(3, "0");
+  return `${prefix}${timestamp}${random}`;
+};
+export const saveBookingDetails = async (bookingData) => {
+  // (no artificial delay)
+  const booking = {
+    ...bookingData,
+    ticketId: generateTicketId(),
+    bookingDate: new Date().toISOString(),
+  };
+  // In a real app, this would save to backend
+  localStorage.setItem("lastBooking", JSON.stringify(booking));
+  return booking;
+};
+export const getBookingDetails = async () => {
+  const booking = localStorage.getItem("lastBooking");
+  return booking ? JSON.parse(booking) : null;
+};

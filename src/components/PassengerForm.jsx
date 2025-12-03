@@ -5,11 +5,11 @@ import { useState } from "react";
 export const PassengerForm = ({ initialData, onSubmit }) => {
   const [formData, setFormData] = useState(
     initialData || {
-      firstName: "anuj",
-      lastName: "singh",
+      firstName: "Anuj",
+      lastName: "Singh",
       email: "anuj@gmail.com",
-      phone: "",
-      age: "",
+      phone: "9876543212",
+      age: "27",
     }
   );
 
