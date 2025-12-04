@@ -81,7 +81,7 @@ const ViewTicketPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-100 flex flex-col">
       <Header title="Your Ticket" />
 
-      <main className="flex-1 flex items-center justify-center p-6 md:p-8">
+      <main className="flex-1 flex flex-col items-center justify-center p-6 md:p-8 w-full">
         <div className="w-full max-w-5xl bg-white rounded-lg shadow-lg overflow-hidden">
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 md:p-12">
             <div className="text-center">
@@ -295,14 +295,12 @@ const ViewTicketPage = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-5xl mt-8 print:hidden">
-          <button
-            onClick={handleNewBooking}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg"
-          >
-            Book Another Ticket
-          </button>
-        </div>
+        <button
+          onClick={handleNewBooking}
+          className="w-full max-w-5xl mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg print:hidden"
+        >
+          Book Another Ticket
+        </button>
       </main>
     </div>
   );
