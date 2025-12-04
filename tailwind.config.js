@@ -1,5 +1,13 @@
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: [
+    "./index.html",
+    "./public/**/*.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./src/**/*.jsx",
+  ],
+  corePlugins: {
+    preflight: true,
+  },
   theme: {
     extend: {
       colors: {
