@@ -1,5 +1,3 @@
-// Review Ticket Page
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -33,11 +31,11 @@ const ReviewTicketPage = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header title="Review Ticket" />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-4xl mx-auto px-4 py-8">
           <ErrorMessage message="Please complete all booking steps before reviewing." />
           <button
             onClick={() => navigate("/")}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
+            className="mt-4 bg-blue-600 text-white font-semibold py-2 px-3 rounded"
           >
             Start New Search
           </button>
@@ -79,7 +77,7 @@ const ReviewTicketPage = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header title="Review Ticket" showBackButton onBack={handleBack} />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-4xl mx-auto px-4 py-8">
           <LoadingSpinner message="Processing your booking..." />
         </main>
       </div>
@@ -90,7 +88,7 @@ const ReviewTicketPage = () => {
     <div className="min-h-screen bg-gray-50">
       <Header title="Review Your Booking" showBackButton onBack={handleBack} />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-4xl mx-auto px-4 py-8">
         {processingError && <ErrorMessage message={processingError} />}
 
         <TicketSummary
@@ -103,17 +101,17 @@ const ReviewTicketPage = () => {
           bus={selectedBus}
         />
 
-        <div className="mt-8 grid grid-cols-2 gap-4">
+        <div className="mt-6 grid grid-cols-2 gap-4">
           <button
             onClick={handleBack}
-            className="bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-3 px-4 rounded-lg transition-colors"
+            className="bg-gray-200 text-gray-900 font-semibold py-2 px-3 rounded"
           >
             Back
           </button>
           <button
             onClick={handleConfirmBooking}
             disabled={loading}
-            className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+            className="bg-green-600 disabled:bg-gray-400 text-white font-semibold py-2 px-3 rounded"
           >
             {loading ? "Processing..." : "Confirm Booking"}
           </button>

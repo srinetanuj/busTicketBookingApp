@@ -15,9 +15,9 @@ export const TicketSummary = ({ bookingData, bus }) => {
   const finalTotal = totalFare;
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+    <div className="space-y-4">
+      <div className="bg-white border border-gray-200 p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
           Route Information
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -49,8 +49,8 @@ export const TicketSummary = ({ bookingData, bus }) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white border border-gray-200 p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
           Bus Details
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -75,8 +75,8 @@ export const TicketSummary = ({ bookingData, bus }) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white border border-gray-200 p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
           Seat Information
         </h3>
         <p className="text-sm text-gray-600 mb-2">
@@ -85,7 +85,7 @@ export const TicketSummary = ({ bookingData, bus }) => {
             {bookingData.selectedSeats.length}
           </span>
         </p>
-        <div className="bg-gray-50 rounded p-3 mb-3">
+        <div className="bg-gray-50 p-3 mb-3">
           <p className="text-sm text-gray-700">
             {bookingData.selectedSeats
               .map((seat) => {
@@ -98,13 +98,13 @@ export const TicketSummary = ({ bookingData, bus }) => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white border border-gray-200 p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
           Passenger Details
         </h3>
 
         {bookingData.contactInfo && (
-          <div className="mb-4 p-3 bg-gray-50 rounded">
+          <div className="mb-3 p-3 bg-gray-50">
             <p className="text-sm text-gray-600">
               Contact Email:{" "}
               <span className="font-semibold text-gray-900">
@@ -152,8 +152,8 @@ export const TicketSummary = ({ bookingData, bus }) => {
         </div>
       </div>
 
-      <div className="bg-blue-50 rounded-lg shadow-md p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-blue-50 border border-gray-200 p-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
           Fare Summary
         </h3>
         <div className="space-y-2">

@@ -1,5 +1,3 @@
-// View Ticket Page - Displays the final confirmed ticket
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,30 +11,31 @@ const ViewTicketPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { bookingDetails } = useSelector((state) => state.booking);
-  const [displayBooking, setDisplayBooking] = useState(null);
+  const [ticket, setTicket] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadBookingDetails = async () => {
+    const load = async () => {
       try {
         setLoading(true);
-
-        if (bookingDetails) {
-          setDisplayBooking(bookingDetails);
-        } else {
-          const booking = await getBookingDetails();
-          if (booking) {
-            setDisplayBooking(booking);
-          }
+        let stored = bookingDetails;
+        if (!stored) {
+          stored = await getBookingDetails();
         }
+        if (!stored) {
+          setError("No booking found. Please make a booking first.");
+          return;
+        }
+        setTicket(stored);
       } catch (err) {
-        console.error("Failed to load booking details");
+        setError("Failed to load booking details.");
       } finally {
         setLoading(false);
       }
     };
 
-    loadBookingDetails();
+    load();
   }, [bookingDetails]);
 
   const handleNewBooking = () => {
@@ -48,68 +47,71 @@ const ViewTicketPage = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header title="Your Ticket" />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <LoadingSpinner message="Loading your ticket..." />
+        <main className="max-w-4xl mx-auto px-4 py-8">
+          <LoadingSpinner message="Loading ticket..." />
         </main>
       </div>
     );
   }
 
-  if (!displayBooking) {
+  if (error) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header title="Your Ticket" />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <ErrorMessage message="Booking details not found" />
-          <button
-            onClick={() => navigate("/")}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg"
-          >
-            Book a New Ticket
-          </button>
+        <main className="max-w-4xl mx-auto px-4 py-8">
+          <ErrorMessage message={error} />
+          <div className="mt-4">
+            <button
+              onClick={handleNewBooking}
+              className="bg-blue-600 text-white py-2 px-3 rounded"
+            >
+              Start New Booking
+            </button>
+          </div>
         </main>
       </div>
     );
   }
 
-  const ticket = displayBooking;
-  const bus = ticket.bus;
-  const totalFare = ticket.totalFare || 0;
+  const bus = ticket?.bus || {};
+  const totalFare = ticket?.totalFare || 0;
   const finalTotal = totalFare;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header title="Your Ticket" />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8">
+      <main className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-6xl min-h-[80vh] bg-white border border-gray-200 overflow-auto">
+          <div className="bg-blue-600 text-white p-8">
             <div className="text-center mb-4">
-              <h2 className="text-3xl font-bold mb-2">✓ Booking Confirmed</h2>
-              <p className="text-blue-100">
+              <h2 className="text-3xl md:text-4xl font-bold mb-1">
+                ✓ Booking Confirmed
+              </h2>
+              <p className="text-blue-100 text-base md:text-lg">
                 Your ticket has been successfully booked
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-50 px-8 py-4 border-b-2 border-dashed border-gray-300">
+          <div className="bg-gray-50 px-10 py-6 border-b border-dashed border-gray-300">
             <p className="text-sm text-gray-600 mb-1">Ticket ID</p>
-            <p className="text-2xl font-bold text-gray-900 tracking-widest">
-              {ticket.ticketId}
+            <p className="text-3xl md:text-4xl font-bold text-gray-900 tracking-widest">
+              {ticket?.ticketId}
             </p>
           </div>
 
-          <div className="p-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="p-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10 items-center">
               <div>
                 <p className="text-sm text-gray-600 mb-2">From</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-3xl md:text-4xl font-bold text-gray-900">
                   {bus.fromCity}
                 </p>
               </div>
-              <div className="flex items-end justify-center mb-2">
+              <div className="flex items-center justify-center">
                 <svg
-                  className="w-8 h-8 text-gray-400"
+                  className="w-10 h-10 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -124,12 +126,14 @@ const ViewTicketPage = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-600 mb-2">To</p>
-                <p className="text-2xl font-bold text-gray-900">{bus.toCity}</p>
+                <p className="text-3xl md:text-4xl font-bold text-gray-900">
+                  {bus.toCity}
+                </p>
               </div>
             </div>
 
             <div className="border-t border-gray-300 pt-8 mb-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                 <div>
                   <p className="text-xs text-gray-600 mb-1 font-semibold">
                     BUS NAME
@@ -143,7 +147,7 @@ const ViewTicketPage = () => {
                     JOURNEY DATE
                   </p>
                   <p className="text-lg font-semibold text-gray-900">
-                    {formatDate(ticket.date)}
+                    {formatDate(ticket?.date)}
                   </p>
                 </div>
                 <div>
@@ -164,34 +168,35 @@ const ViewTicketPage = () => {
                 </div>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-4 mb-8">
+              <div className="bg-gray-50 p-4 mb-6">
                 <p className="text-xs text-gray-600 mb-2 font-semibold">
                   SEATS BOOKED
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {ticket.selectedSeats.map((seat) => {
-                    const row = seat.row + 1;
-                    const col = String.fromCharCode(65 + seat.col);
-                    return (
-                      <span
-                        key={seat.seatNumber}
-                        className="bg-blue-500 text-white px-3 py-1 rounded font-semibold text-sm"
-                      >
-                        {row}
-                        {col}
-                      </span>
-                    );
-                  })}
+                  {Array.isArray(ticket?.selectedSeats) &&
+                    ticket.selectedSeats.map((seat) => {
+                      const row = (seat.row ?? 0) + 1;
+                      const col = String.fromCharCode(65 + (seat.col ?? 0));
+                      return (
+                        <span
+                          key={seat.seatNumber ?? `${row}${col}`}
+                          className="bg-blue-500 text-white px-3 py-1 rounded font-semibold text-sm"
+                        >
+                          {row}
+                          {col}
+                        </span>
+                      );
+                    })}
                 </div>
               </div>
 
-              <div className="bg-gray-50 rounded-lg p-6 mb-8">
-                <p className="text-xs text-gray-600 mb-4 font-semibold">
+              <div className="bg-gray-50 p-4 mb-6">
+                <p className="text-xs text-gray-600 mb-3 font-semibold">
                   BOOKING & PASSENGER INFORMATION
                 </p>
 
-                {ticket.contactInfo && (
-                  <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded">
+                {ticket?.contactInfo && (
+                  <div className="mb-4 p-3 bg-blue-50 border border-blue-200">
                     <p className="text-xs text-gray-600 mb-2 font-semibold">
                       CONTACT INFORMATION
                     </p>
@@ -215,7 +220,7 @@ const ViewTicketPage = () => {
                     PASSENGERS
                   </p>
                   <div className="space-y-3">
-                    {Array.isArray(ticket.passengerInfo) &&
+                    {Array.isArray(ticket?.passengerInfo) &&
                     ticket.passengerInfo.length > 0 ? (
                       ticket.passengerInfo.map((p, i) => (
                         <div
@@ -252,11 +257,11 @@ const ViewTicketPage = () => {
               </div>
             </div>
 
-            <div className="border-t border-gray-300 pt-8 bg-blue-50 rounded-lg p-6">
-              <div className="space-y-3 mb-4">
+            <div className="border-t border-gray-300 pt-6 bg-blue-50 p-4">
+              <div className="space-y-2 mb-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-700">
-                    Base Fare ({ticket.selectedSeats.length} seats)
+                    Base Fare ({(ticket?.selectedSeats || []).length} seats)
                   </span>
                   <span className="font-semibold text-gray-900">
                     {formatCurrency(totalFare)}
@@ -275,10 +280,10 @@ const ViewTicketPage = () => {
           </div>
         </div>
 
-        <div className="mt-8 space-y-4 print:hidden">
+        <div className="w-full max-w-6xl mt-6 space-y-3 print:hidden">
           <button
             onClick={handleNewBooking}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-3 px-4 rounded-lg transition-all"
+            className="w-full bg-blue-600 text-white font-semibold py-2 px-3 rounded"
           >
             Book Another Ticket
           </button>

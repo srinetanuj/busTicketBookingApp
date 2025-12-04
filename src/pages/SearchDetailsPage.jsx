@@ -1,5 +1,3 @@
-// Search Details Page
-
 import { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -79,7 +77,7 @@ const SearchDetailsPage = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header title="Search Results" showBackButton onBack={handleBack} />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-4xl mx-auto px-4 py-8">
           <LoadingSpinner message="Finding available buses..." />
         </main>
       </div>
@@ -90,10 +88,10 @@ const SearchDetailsPage = () => {
     <div className="min-h-screen bg-gray-50">
       <Header title="Search Results" showBackButton onBack={handleBack} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-4xl mx-auto px-4 py-8">
         {error && <ErrorMessage message={error} onRetry={fetchBuses} />}
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-white border border-gray-200 p-4 mb-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-2">
             {searchCriteria.fromCity} → {searchCriteria.toCity}
           </h2>
@@ -111,7 +109,7 @@ const SearchDetailsPage = () => {
         </div>
 
         {buses.length > 0 ? (
-          <div className="space-y-4">
+          <div className="space-y-2">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">
               {buses.length} buses available
             </h3>

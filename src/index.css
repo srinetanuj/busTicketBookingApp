@@ -14,5 +14,3 @@ body {
   font-family: 'Inter', sans-serif;
   @apply bg-gray-50 text-gray-900;
 }
-
-/* (Removed custom scrollbar and animation rules to simplify CSS) */

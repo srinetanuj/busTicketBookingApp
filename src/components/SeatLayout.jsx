@@ -1,5 +1,3 @@
-// SeatLayout Component
-
 import { getSeatLabel } from "../utils/helpers";
 
 export const SeatLayout = ({
@@ -36,26 +34,26 @@ export const SeatLayout = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="mb-6 flex gap-4 justify-center flex-wrap">
+    <div className="bg-white border border-gray-200 p-4">
+      <div className="mb-4 flex gap-4 justify-center flex-wrap">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-gray-200 border-2 border-gray-300 rounded"></div>
+          <div className="w-5 h-5 bg-gray-200 border border-gray-300 rounded"></div>
           <span className="text-sm text-gray-700">Available</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-blue-500 border-2 border-blue-600 rounded"></div>
+          <div className="w-5 h-5 bg-blue-500 border border-blue-600 rounded"></div>
           <span className="text-sm text-gray-700">Selected</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-red-200 border-2 border-red-400 rounded cursor-not-allowed"></div>
+          <div className="w-5 h-5 bg-red-200 border border-red-400 rounded"></div>
           <span className="text-sm text-gray-700">Booked</span>
         </div>
       </div>
 
-      <div className="space-y-3 flex flex-col items-center">
+      <div className="space-y-2 flex flex-col items-center">
         {rows.map((row) => (
           <div key={row} className="flex gap-2 items-center">
-            <span className="w-6 text-center text-sm font-semibold text-gray-600">
+            <span className="w-5 text-center text-xs font-semibold text-gray-600">
               {parseInt(row) + 1}
             </span>
             <div className="flex gap-2">
@@ -63,16 +61,15 @@ export const SeatLayout = ({
                 const isSelected = isSeatSelected(seat.seatNumber);
                 const isBooked = seat.isBooked;
 
-                let seatClass =
-                  "w-6 h-6 border-2 rounded cursor-pointer transition-all ";
+                let seatClass = "w-5 h-5 border rounded cursor-pointer ";
 
                 if (isBooked) {
                   seatClass +=
                     "bg-red-200 border-red-400 cursor-not-allowed opacity-50";
                 } else if (isSelected) {
-                  seatClass += "bg-blue-500 border-blue-600 hover:bg-blue-600";
+                  seatClass += "bg-blue-500 border-blue-600";
                 } else {
-                  seatClass += "bg-gray-200 border-gray-300 hover:bg-gray-300";
+                  seatClass += "bg-gray-200 border-gray-300";
                 }
 
                 return (
@@ -92,7 +89,7 @@ export const SeatLayout = ({
                 );
               })}
             </div>
-            <span className="w-6 text-center text-sm font-semibold text-gray-600">
+            <span className="w-5 text-center text-xs font-semibold text-gray-600">
               {parseInt(row) + 1}
             </span>
           </div>

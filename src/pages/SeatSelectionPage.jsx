@@ -1,5 +1,3 @@
-// Seat Selection Page
-
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -81,7 +79,7 @@ const SeatSelectionPage = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header title="Select Seats" showBackButton onBack={handleBack} />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-4xl mx-auto px-4 py-8">
           <LoadingSpinner message="Loading seat layout..." />
         </main>
       </div>
@@ -92,7 +90,7 @@ const SeatSelectionPage = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <Header title="Select Seats" showBackButton onBack={handleBack} />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-4xl mx-auto px-4 py-8">
           <ErrorMessage message="Bus information not found" />
         </main>
       </div>
@@ -103,10 +101,10 @@ const SeatSelectionPage = () => {
     <div className="min-h-screen bg-gray-50">
       <Header title="Select Your Seats" showBackButton onBack={handleBack} />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8">
         {error && <ErrorMessage message={error} />}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <SeatLayout
               seats={seats}
@@ -116,12 +114,12 @@ const SeatSelectionPage = () => {
             />
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className="bg-white border border-gray-200 p-4 h-fit">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
               Fare Summary
             </h3>
 
-            <div className="bg-gray-50 rounded-lg p-4 mb-4">
+            <div className="bg-gray-100 p-3 mb-3">
               <p className="text-sm text-gray-600 mb-1">Bus</p>
               <p className="font-semibold text-gray-900">{selectedBus.name}</p>
               <p className="text-xs text-gray-600 mt-2">
@@ -129,12 +127,12 @@ const SeatSelectionPage = () => {
               </p>
             </div>
 
-            <div className="mb-4">
+            <div className="mb-3">
               <p className="text-sm font-semibold text-gray-700 mb-2">
                 Selected Seats ({selectedSeats.length})
               </p>
               {selectedSeats.length > 0 ? (
-                <div className="bg-blue-50 rounded-lg p-3 mb-3">
+                <div className="bg-blue-50 p-3 mb-3">
                   <p className="text-sm text-gray-700 flex flex-wrap gap-2">
                     {selectedSeats.map((seat) => {
                       const row = seat.row + 1;
@@ -179,7 +177,7 @@ const SeatSelectionPage = () => {
               </div>
             </div>
 
-            <div className="bg-blue-50 rounded-lg p-4 mb-6">
+            <div className="bg-blue-50 p-4 mb-6">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-gray-900">
                   Total Amount
@@ -193,13 +191,13 @@ const SeatSelectionPage = () => {
             <button
               onClick={handleProceed}
               disabled={selectedSeats.length === 0}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors mb-2"
+              className="w-full bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded mb-2"
             >
               Continue to Passenger Details
             </button>
             <button
               onClick={handleBack}
-              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold py-2 px-4 rounded-lg transition-colors"
+              className="w-full bg-gray-200 text-gray-900 font-semibold py-2 px-4 rounded"
             >
               Back
             </button>

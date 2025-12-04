@@ -1,5 +1,3 @@
-// Passenger Information Page
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -105,11 +103,11 @@ const PassengerInfoPage = () => {
           showBackButton
           onBack={handleBack}
         />
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-4xl mx-auto px-4 py-8">
           <ErrorMessage message="No seats selected. Please select seats first." />
           <button
             onClick={() => navigate("/")}
-            className="mt-4 bg-blue-600 text-white py-2 px-4 rounded"
+            className="mt-4 bg-blue-600 text-white py-2 px-3 rounded"
           >
             Start New Search
           </button>
@@ -126,11 +124,11 @@ const PassengerInfoPage = () => {
         onBack={handleBack}
       />
 
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <main className="max-w-4xl mx-auto px-4 py-8">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Contact info (one per booking) */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold mb-4">
+          <div className="bg-white border border-gray-200 p-4">
+            <h3 className="text-lg font-semibold mb-3">
               Contact Details (one email & phone for booking)
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -141,7 +139,7 @@ const PassengerInfoPage = () => {
                 <input
                   value={contact.email}
                   onChange={(e) => handleContactChange("email", e.target.value)}
-                  className={`w-full px-4 py-2 border rounded ${
+                  className={`w-full px-3 py-2 border rounded ${
                     contactErrors.email ? "border-red-500" : "border-gray-300"
                   }`}
                 />
@@ -158,7 +156,7 @@ const PassengerInfoPage = () => {
                 <input
                   value={contact.phone}
                   onChange={(e) => handleContactChange("phone", e.target.value)}
-                  className={`w-full px-4 py-2 border rounded ${
+                  className={`w-full px-3 py-2 border rounded ${
                     contactErrors.phone ? "border-red-500" : "border-gray-300"
                   }`}
                   maxLength={10}
@@ -175,8 +173,8 @@ const PassengerInfoPage = () => {
 
           {/* Per-passenger forms */}
           {forms.map((f, idx) => (
-            <div key={idx} className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-4">
+            <div key={idx} className="bg-white border border-gray-200 p-4">
+              <h3 className="text-lg font-semibold mb-3">
                 Passenger {idx + 1} - Seat{" "}
                 {selectedSeats[idx]
                   ? `${selectedSeats[idx].row + 1}${String.fromCharCode(

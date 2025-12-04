@@ -1,5 +1,3 @@
-//  Home Page
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -77,20 +75,20 @@ const HomePage = () => {
   if (loading) return <LoadingSpinner message="Loading cities..." />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-50">
       <Header title="Bus Ticket Booking" />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="max-w-4xl mx-auto px-4 py-12">
         {error && <ErrorMessage message={error} onRetry={loadCities} />}
 
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Book Your Bus Ticket
           </h2>
         </div>
 
-        <div className="bg-white rounded-lg shadow-xl p-8 max-w-2xl mx-auto">
-          <form onSubmit={handleSearch} className="space-y-6">
+        <div className="bg-white border border-gray-200 p-6 max-w-2xl mx-auto">
+          <form onSubmit={handleSearch} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -100,10 +98,8 @@ const HomePage = () => {
                   name="fromCity"
                   value={formData.fromCity}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
-                    formErrors.fromCity
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-blue-500"
+                  className={`w-full px-3 py-2 border rounded ${
+                    formErrors.fromCity ? "border-red-500" : "border-gray-300"
                   }`}
                 >
                   <option value="">Select city</option>
@@ -128,10 +124,8 @@ const HomePage = () => {
                   name="toCity"
                   value={formData.toCity}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
-                    formErrors.toCity
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-blue-500"
+                  className={`w-full px-3 py-2 border rounded ${
+                    formErrors.toCity ? "border-red-500" : "border-gray-300"
                   }`}
                 >
                   <option value="">Select city</option>
@@ -159,10 +153,8 @@ const HomePage = () => {
                   onChange={handleChange}
                   min={getMinDate()}
                   max={getMaxDate()}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 transition-all ${
-                    formErrors.date
-                      ? "border-red-500 focus:ring-red-500"
-                      : "border-gray-300 focus:ring-blue-500"
+                  className={`w-full px-3 py-2 border rounded ${
+                    formErrors.date ? "border-red-500" : "border-gray-300"
                   }`}
                 />
                 {formErrors.date && (
@@ -173,7 +165,7 @@ const HomePage = () => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105"
+              className="w-full bg-blue-600 text-white font-bold py-2 px-6 rounded"
             >
               Search Buses
             </button>

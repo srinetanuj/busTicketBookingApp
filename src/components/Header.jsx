@@ -1,18 +1,13 @@
-//  Header Component
-
 export const Header = ({ title, showBackButton, onBack }) => {
   return (
-    <header className="bg-gradient-to-r from-gray-900 to-gray-800 text-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <header className="bg-gray-900 text-white border-b border-gray-700">
+      <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {showBackButton && (
-              <button
-                onClick={onBack}
-                className="hover:bg-gray-700 p-2 rounded-lg transition-colors"
-              >
+              <button onClick={onBack} className="bg-gray-800 p-2 rounded">
                 <svg
-                  className="w-6 h-6"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -26,9 +21,9 @@ export const Header = ({ title, showBackButton, onBack }) => {
                 </svg>
               </button>
             )}
-            <h1 className="text-2xl font-bold">🚌 {title}</h1>
+            <h1 className="text-xl font-bold">🚌 {title}</h1>
           </div>
-          <div className="text-sm text-gray-300">Bus Ticket Booking</div>
+          <div className="text-sm text-gray-400">Bus Ticket Booking</div>
         </div>
       </div>
     </header>
