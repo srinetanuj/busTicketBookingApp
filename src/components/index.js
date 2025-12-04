@@ -1,3 +1,5 @@
+//  Loading Spinner Component
+
 export const LoadingSpinner = ({ message = "Loading..." }) => {
   return (
     <div className="flex flex-col items-center justify-center py-12">
@@ -6,6 +8,8 @@ export const LoadingSpinner = ({ message = "Loading..." }) => {
     </div>
   );
 };
+
+// ErrorMessage Component
 
 export const ErrorMessage = ({ message, onRetry }) => {
   return (
@@ -38,6 +42,7 @@ export const ErrorMessage = ({ message, onRetry }) => {
   );
 };
 
+// EmptyState Component
 export const EmptyState = ({ title, message, icon = "🔍" }) => {
   return (
     <div className="text-center py-12">
@@ -46,5 +51,4 @@ export const EmptyState = ({ title, message, icon = "🔍" }) => {
       <p className="text-gray-600">{message}</p>
     </div>
   );
-};
 };
