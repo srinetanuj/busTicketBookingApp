@@ -72,3 +72,10 @@ src/
 - Real-time fare calculation
 - Unique ticket ID generation
 - localStorage booking persistence
+
+**Srinetanuj** - [GitHub Profile](https://github.com/srinetanuj)
+
+## Repository
+
+- **GitHub:** https://github.com/srinetanuj/busTicketBookingApp
+- **Live App:** https://bus-ticket-booking-app01.vercel.app/
