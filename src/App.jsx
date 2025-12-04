@@ -13,9 +13,6 @@ import ReviewTicketPage from "./pages/ReviewTicketPage";
 import ViewTicketPage from "./pages/ViewTicketPage";
 import "./index.css";
 
-/**
- * App Component - Main application with routing
- */
 function App() {
   return (
     <Router>
